@@ -19,3 +19,12 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+.MuiTypography-root {
+  text-transform: capitalize;
+  font-weight: bolder; 
+}
+
+.MuiTableCell-root{
+  text-align: center; 
+  color: white;
+}

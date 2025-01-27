@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Lead {
+  lead_id     String      @id @default(uuid())
+  first_name  String
+  last_name   String
+  email       String      @unique
+  phone       String
+  notes       String? // Optional field for additional lead details
+  created_at  DateTime    @default(now())
+  updated_at  DateTime    @updatedAt
+  assignments Assignment? // Relationship to track assignments 
+
+  @@index([lead_id], map: "lead_id_idx")
+}
+
+model SalesPerson {
+  sales_person_id String       @id @default(uuid())
+  first_name      String
+  last_name       String
+  email           String       @unique
+  phone           String
+  created_at      DateTime     @default(now())
+  updated_at      DateTime     @updatedAt
+  assignments     Assignment[] // Relationship to track assignments 
+
+  @@index([sales_person_id], map: "sales_person_id_idx")
+}
+
+model Assignment {
+  assignment_id   String           @id @default(uuid())
+  sales_person_id String
+  status          AssignmentStatus @default(PENDING)
+  assignedAt      DateTime         @default(now())
+  completedAt     DateTime? // Optional field to store completion date
+  lead            Lead            @relation(fields: [lead_id], references: [lead_id])
+  lead_id         String          @unique
+  salesperson     SalesPerson      @relation(fields: [sales_person_id], references: [sales_person_id])
+
+  @@unique([lead_id, sales_person_id]) // A lead cannot be assigned to the same salesperson twice 
+  @@index([sales_person_id], map: "assignment_id_idx")
+}
+
+enum AssignmentStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+}
