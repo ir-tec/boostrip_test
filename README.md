@@ -12,3 +12,13 @@ See the Deployed on Vercel
 - **Formik & Yup**: Form management and validation made easy.
 - **Framer Motion**: For smooth animations and transitions.
 
+
+## Improvements 
+
+**Validations** : There is no validation on the server side for fields for inputs. 
+
+**Database design** : Database can be more precise to cover our data in details.
+
+**UI Design** : The design and animation are no reflection of what can be done. If there was more time and defined design, we could have much more to see. 
+
+**Stete management** : It whould be a better choice to use an seperate state management like redux to create a signle sourse for our state.
