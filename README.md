@@ -22,3 +22,5 @@ See the Deployed on Vercel
 **UI Design** : The design and animation are no reflection of what can be done. If there was more time and defined design, we could have much more to see. 
 
 **Stete management** : It whould be a better choice to use an seperate state management like redux to create a signle sourse for our state.
+
+**Error Handleing** : The app should be tested more thoroughly to find the scenarios that encounter problems.
